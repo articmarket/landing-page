@@ -1,126 +1,249 @@
-.contact-container {
-    margin: 0 auto;
-    padding: 2rem 1rem;
-    max-width: 1250px;
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+}
+
+.logo {
+  width: 51px;
+  height: auto;
+  margin-left: 30px;
+}
+
+/* Navigation styling */
+.nav {
+  display: flex;
+  gap: 29px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* Menu icon for mobile */
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-icon div {
+  width: 27px;
+  height: 5px;
+  background-color: white;
+  margin: 2px 0;
+}
+
+/* Sidebar for mobile navigation */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  right: -250px;
+  background-color: #333;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 1;
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #575757;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/* Background image container */
+.bg-image-container {
+  position: relative;
+  width: 100%;
+  height: 92%;
+  overflow: hidden; /* Hide overflow to prevent scrollbars */
+  max-width: 1600px; /* Set maximum width for the image container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.bg-image {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  border-radius: 0 0 5% 5%; /* Matching the curve of the header */
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  width: 80%;
+}
+
+.overlay h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.overlay p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+button {
+  border-radius: 46px;
+  background-color: #1dd75b;
+  color: #fff;
+  padding: 15px 27px;
+  font-size: 19px;
+  border: none;
+}
+
+button span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+}
+
+/* Responsive styles */
+
+/* Extra small devices (phones, 320px and up) */
+@media (max-width: 480px) {
+  .nav {
+    display: none;
   }
-  
-  .contact-title {
-    font-size: 1.875rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: left; /* Center the title for better responsiveness */
-  }
-  
-  .contact-divider {
-    width: 8rem;
-    height: 0.25rem;
-    background-color: #F59E0B;
-    margin: 1px 1px 1rem;
-  }
-  
-  .contact-description {
-    text-align: left; /* Center the description for better responsiveness */
-    color: #52525B;
-    margin-bottom: 4rem;
-  }
-  
-  .contact-methods {
+
+  .menu-icon {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+  }
+
+  .overlay {
+    width: 90%;
+  }
+
+  .overlay h1 {
+    font-size: 2em;
+  }
+
+  .overlay p {
+    font-size: 1em;
+  }
+
+  .bg-image-container {
+    max-width: 100%; /* Ensure the container does not have a max-width */
+    height: 100%;
+  }
+
+  .bg-image {
     width: 100%;
-    gap: 2rem;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center;
   }
-  
-  .contact-method {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .menu-icon {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
   }
-  
-  .contact-icon {
-    margin-bottom: 0.5rem;
-    display: inline-block;
-    margin-right: 10px;
-    width: 40px;
-    height: 40px;
+
+  .overlay {
+    width: 90%;
   }
-  
-  .contact-method-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
+
+  .overlay h1 {
+    font-size: 2.5em;
   }
-  
-  .contact-method-description {
-    color: #52525B;
-    margin-bottom: -3px;
+
+  .overlay p {
+    font-size: 1.1em;
   }
-  
-  .contact-method-detail {
-    color: #27272A;
-    font-weight: 500;
+
+  .bg-image-container {
+    max-width: 100%; /* Ensure the container does not have a max-width */
+    height: 100%;
   }
-  
-  /* Media queries for responsive design */
-  
-  /* Extra small devices (phones, 320px and up) */
-  @media (min-width: 320px) {
-    .contact-title {
-      font-size: 1.5rem;
-    }
-  
-    .contact-methods {
-      gap: 1.5rem;
-    }
+
+  .bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center;
   }
-  
-  /* Small devices (landscape phones, 480px and up) */
-  @media (min-width: 480px) {
-    .contact-title {
-      font-size: 1.75rem;
-    }
-  
-    .contact-method-title {
-      font-size: 1.125rem;
-    }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
   }
-  
-  /* Medium devices (tablets, 768px and up) */
-  @media (min-width: 768px) {
-    .contact-methods {
-      flex-direction: row;
-      justify-content: center;
-      gap: 4rem;
-    }
-  
-    .contact-title {
-      font-size: 1.875rem;
-    }
-  
-    .contact-description {
-      text-align: left; /* Align text left for larger screens */
-      margin-bottom: 3rem;
-    }
+
+  .menu-icon {
+    display: none;
   }
-  
-  /* Large devices (desktops, 1024px and up) */
-  @media (min-width: 1024px) {
-    .contact-title {
-      font-size: 2rem;
-    }
-  
-    .contact-method-title {
-      font-size: 1.25rem;
-    }
-  
-    .contact-description {
-      margin-bottom: 6rem;
-    }
-  
-    .contact-methods {
-      gap: 6rem;
-    }
+
+  .overlay {
+    width: 80%;
   }
-  
+
+  .overlay h1 {
+    font-size: 3em;
+  }
+
+  .overlay p {
+    font-size: 1.2em;
+  }
+
+  .bg-image-container {
+    max-width: 100%; /* Ensure the container does not have a max-width */
+    height: 100%;
+  }
+
+  .bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center;
+  }
+}
