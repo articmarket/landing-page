@@ -17,7 +17,7 @@ body, html {
 .logo {
   width: 51px;
   height: auto;
-  margin-left: 8px;
+  margin-left: 7px;
 }
 
 /* Navigation styling */
@@ -65,7 +65,7 @@ body, html {
 }
 
 .sidebar a {
-  padding: 10px 15px;
+  padding: 10px 23px;
   text-decoration: none;
   font-size: 25px;
   color: white;
@@ -144,106 +144,605 @@ button span {
 /* Responsive styles */
 
 /* Extra small devices (phones, 320px and up) */
-@media (max-width: 480px) {
+@media (max-width: 320px) {
   .nav {
-    display: none;
+  display: none;
   }
-
+  
   .menu-icon {
-    display: flex;
+  display: flex;
   }
-
+  
   .overlay {
-    width: 90%;
+  width: 90%;
   }
-
+  
   .overlay h1 {
-    font-size: 2em;
+  font-size: 2em;
   }
-
+  
   .overlay p {
-    font-size: 1em;
+  font-size: 1em;
+  }
+  
+  .bg-image-container {
+  max-width: 100%; /* Ensure the container does not have a max-width */
+  height: 100%;
+  }
+  
+  .bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+  object-position: center;
+  }
+  
+  .main-button {
+  margin: 43px 43px -4px 84px;
+  padding: 12px 15px;
+  font: 18px/156% ABeeZee, sans-serif;
+  }
   }
 
-  .bg-image-container {
+  @media (max-width: 480px) {
+    .nav {
+    display: none;
+    }
+    
+    .menu-icon {
+    display: flex;
+    }
+    
+    .overlay {
+    width: 90%;
+    }
+    
+    .overlay h1 {
+    font-size: 2em;
+    }
+    
+    .overlay p {
+    font-size: 1em;
+    }
+    
+    .bg-image-container {
     max-width: 100%; /* Ensure the container does not have a max-width */
     height: 100%;
-  }
-
-  .bg-image {
+    }
+    
+    .bg-image {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensure the image covers the entire container */
     object-position: center;
+    }
+    
+    .main-button {
+    margin: 43px 43px -4px 84px;
+    padding: 12px 15px;
+    font: 18px/156% ABeeZee, sans-serif;
+    }
+    }
+
+    @media (max-width: 769px) {
+      .nav {
+      display: none;
+      }
+      
+      .menu-icon {
+      display: flex;
+      }
+      
+      .overlay {
+      width: 90%;
+      }
+      
+      .overlay h1 {
+      font-size: 2em;
+      }
+      
+      .overlay p {
+      font-size: 1em;
+      }
+      
+      .bg-image-container {
+      max-width: 100%; /* Ensure the container does not have a max-width */
+      height: 100%;
+      }
+      
+      .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure the image covers the entire container */
+      object-position: center;
+      }
+      
+      .main-button {
+      margin: 43px 43px -4px 84px;
+      padding: 12px 15px;
+      font: 18px/156% ABeeZee, sans-serif;
+      }
+      }
+
+/* Footer styling */
+footer {
+  background-color: #f8f9fa; /* Light grey background for the footer */
+  padding: 20px 39px; /* Padding for top and bottom */
+  border-top: 1px solid #ffffff; /* Light grey top border */
+}
+
+.footer-left, .footer-center, .footer-right {
+  flex: 1; /* Allow equal spacing for each section */
+}
+
+.footer-left {
+    margin-left: -14px;
+    font-size: 1.1rem;
+}
+
+.footer-center {
+  text-align: center;
+}
+
+
+@media (max-width: 320px) {
+  footer {
+    padding: 10px 15px;
+  }
+
+  .footer-left, .footer-center, .footer-right {
+    padding: 0px;
+    font-size: 12px; /* Smaller font size for small screens */
+    margin-left: 1px;
+  }
+}
+
+@media (max-width: 469px) {
+  footer {
+    padding: 10px 15px;
+  }
+
+  .footer-left, .footer-center, .footer-right {
+    padding: 0px;
+    font-size: 11px; /* Smaller font size for small screens */
+    margin-left: 1px;
+  }
+}
+
+/* Contact us page styles */
+.contact-container {
+  margin: 0 auto;
+  padding: 4rem 1rem;
+  max-width: 1250px;
+}
+
+.contact-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: left; /* Center the title for better responsiveness */
+}
+
+.contact-divider {
+  width: 8rem;
+  height: 0.25rem;
+  background-color: #F59E0B;
+  margin: 1px 1px 1rem;
+}
+
+.contact-description {
+  text-align: left; /* Center the description for better responsiveness */
+  color: #52525B;
+  margin-bottom: 4rem;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.contact-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-icon {
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.contact-method-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.contact-method-description {
+  color: #52525B;
+  margin-bottom: -3px;
+}
+
+.contact-method-detail {
+  color: #27272A;
+  font-weight: 500;
+}
+
+/* Media queries for responsive design */
+
+/* Extra small devices (phones, 320px and up) */
+@media (min-width: 320px) {
+  .contact-title {
+    font-size: 1.5rem;
+  }
+
+  .contact-methods {
+    gap: 1.5rem;
+  }
+}
+
+/* Small devices (landscape phones, 480px and up) */
+@media (min-width: 480px) {
+  .contact-title {
+    font-size: 1.75rem;
+  }
+
+  .contact-method-title {
+    font-size: 1.125rem;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
-@media (max-width: 768px) {
-  .nav {
-    display: none;
+@media (min-width: 768px) {
+  .contact-methods {
+    flex-direction: row;
+    justify-content: center;
+    gap: 4rem;
   }
 
-  .menu-icon {
-    display: flex;
+  .contact-title {
+    font-size: 1.875rem;
   }
 
-  .overlay {
-    width: 90%;
-  }
-
-  .overlay h1 {
-    font-size: 2.5em;
-  }
-
-  .overlay p {
-    font-size: 1.1em;
-  }
-
-  .bg-image-container {
-    max-width: 100%; /* Ensure the container does not have a max-width */
-    height: 100%;
-  }
-
-  .bg-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
-    object-position: center;
+  .contact-description {
+    text-align: left; /* Align text left for larger screens */
+    margin-bottom: 3rem;
   }
 }
 
 /* Large devices (desktops, 1024px and up) */
 @media (min-width: 1024px) {
-  .nav {
-    display: flex;
+  .contact-title {
+    font-size: 2rem;
   }
 
-  .menu-icon {
-    display: none;
+  .contact-method-title {
+    font-size: 1.25rem;
   }
 
-  .overlay {
-    width: 80%;
+  .contact-description {
+    margin-bottom: 6rem;
   }
 
-  .overlay h1 {
-    font-size: 3em;
-  }
-
-  .overlay p {
-    font-size: 1.2em;
-  }
-
-  .bg-image-container {
-    max-width: 100%; /* Ensure the container does not have a max-width */
-    height: 100%;
-  }
-
-  .bg-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
-    object-position: center;
+  .contact-methods {
+    gap: 6rem;
   }
 }
+
+
+/* About us page styles */
+
+.containeras {
+  margin: 0 auto;
+  padding: 8rem 1rem; /* Reduced padding for smaller screens */
+  max-width: 1300px;
+}
+
+.primary {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.secondary {
+  text-align: center;
+  color: #71717a; /* zinc-500 */
+  margin-bottom: 2rem;
+}
+
+.tertiary {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.left-text {
+  text-align: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* Reduced gap for smaller screens */
+}
+
+.responsive {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.half {
+  width: 75%;
+  max-width: 493px;
+  min-width: 250px;
+}
+
+.mb-2 {
+  font-size: 2.0rem;
+  margin-bottom: 0.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 8rem;
+  font-size: 1.3rem;
+}
+
+.mt-4 {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
+/* Media queries */
+@media (min-width: 320px) {
+  .primary {
+    font-size: 1.8rem;
+  }
+  
+
+  .secondary {
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+  }
+
+  .tertiary {
+    font-size: 1.75rem;
+  }
+
+  .mt-4 {
+    text-align: center;
+    margin-right: -9rem;
+    margin: 6%;
+  }
+}
+
+@media (min-width: 768px) {
+  .containeras {
+    padding: 8rem 1rem;
+  }
+
+  .primary {
+    font-size: 2.2rem;
+  }
+
+  .secondary {
+    font-size: 1.7rem;
+    margin-bottom: 7rem;
+  }
+
+  .tertiary {
+    font-size: 1.6rem;
+    margin-left: -43px;
+    text-align: center;
+  }
+  .flex-row {
+      flex-direction: row;
+    }
+  
+    .reverse {
+      flex-direction: row-reverse;
+      margin-left: -142px;
+    }
+  
+    .left-text {
+      text-align: center;
+      margin-left: 153px;
+    }
+  
+    .mt-0 {
+      margin-top: 0;
+    }
+  
+    .mr-8 {
+      margin-right: 2rem;
+    }
+  
+    .ml-8 {
+      margin-left: 2rem;
+    }
+}
+
+/* Shop about section */
+.shop-about-section {
+  text-align: center;
+  margin: 25px 0; /* Reduced margin for smaller screens */
+  background-color: #f9f9f9; /* Light grey background for the section */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.shop-about-section .shop-about {
+  font-size: 1.5rem;
+  color: #333; /* Dark grey color for the heading */
+  font-family: 'ABeeZee', sans-serif;
+  margin-top: 40px; /* Reduced margin for smaller screens */
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.shop-about-section p {
+  color: #777; /* Medium grey color for the paragraph */
+  font-family: 'ABeeZee', sans-serif;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.shop-about-section .shop-2 {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px; /* Reduced padding for smaller screens */
+  text-decoration: none;
+  color: #fff; /* White color for the button text */
+  background: #D1510A; /* Background color for the button */
+  border-radius: 20px; /* Reduced border radius for smaller screens */
+  font-family: 'ABeeZee', sans-serif; /* Button font family */
+  font-size: 1rem;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.shop-about-section .shop-2:hover {
+  background-color: #bf3f07; /* Darker shade for the button on hover */
+}
+
+/* Media queries for larger screens */
+@media (min-width: 480px) {
+  .shop-about-section .shop-about {
+    font-size: 2rem;
+  }
+
+  .shop-about-section p {
+    font-size: 1.25rem;
+  }
+
+  .shop-about-section .shop-2 {
+    padding: 15px 25px;
+    border-radius: 26px;
+    font-size: 1.25rem;
+  }
+}
+
+
+/* Why us page styles */
+
+
+.custom-container {
+  margin: 0 auto;
+  padding: 5rem 1rem;
+  max-width: 1250px;
+}
+
+.custom-title {
+  font-size: 1.0em;
+  margin-left: 26px;
+  color: #22c55e;
+}
+
+.custom-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .custom-content {
+    flex-direction: row;
+    justify-content: center;
+    gap: 6rem;
+  }
+}
+
+.custom-main-image {
+  width: 100%;
+  max-width: 462px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .custom-main-image {
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+}
+
+.custom-text-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+.custom-subtitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  margin-left: 25px;
+  text-align: center;
+}
+
+.custom-feature {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 29px;
+}
+
+.custom-icon {
+  width: 48px;
+  height: 53px;
+  margin-right: 16px;
+  margin-top: -11px;
+}
+
+.custom-feature-title {
+  color: #3b82f6;
+  margin: 0;
+}
+
+.custom-feature-description {
+  color: #000000;
+  margin: 13px;
+}
+
+@media (max-width: 480px) {
+  .custom-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .custom-feature-description {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .custom-subtitle {
+    font-size: 0.9rem;
+    margin-left: -1px;
+  }
+
+  .custom-feature-description {
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .custom-feature-description {
+    color: #000000;
+  }
+}
+
+
