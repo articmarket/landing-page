@@ -10,7 +10,7 @@ body, html {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #333;
+  background-color: #ffffff;
   color: white;
 }
 
@@ -23,14 +23,14 @@ body, html {
 /* Navigation styling */
 .nav {
   display: flex;
-  gap: 15px;
+  gap: 12px;
 }
 
 .nav a {
   color: white;
   text-decoration: none;
   font-size: 18px;
-  margin-right: 18px;
+  margin-right: 31px;
 }
 
 .nav a:hover {
@@ -471,7 +471,7 @@ footer {
 .flex-col {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 0rem;
 }
 
 .flex-row {
@@ -487,7 +487,7 @@ footer {
 }
 
 .half {
-  width: 75%;
+  width: 159%;
   max-width: 493px;
   min-width: 250px;
 }
@@ -526,8 +526,8 @@ footer {
 
   .mt-4 {
     text-align: center;
-    margin-right: -9rem;
-    margin: 6%;
+    margin-right: 9rem;
+    /* margin: 0%; */
   }
 }
 
@@ -552,11 +552,14 @@ footer {
   }
   .flex-row {
       flex-direction: row;
+      margin-right: -57px;
     }
   
     .reverse {
       flex-direction: row-reverse;
       margin-left: -142px;
+      margin: 8%;
+      margin-right: -4px;
     }
   
     .left-text {
