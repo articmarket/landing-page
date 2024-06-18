@@ -23,14 +23,14 @@ body, html {
 /* Navigation styling */
 .nav {
   display: flex;
-  gap: 22px;
+  gap: 12px;
 }
 
 .nav a {
   color: white;
   text-decoration: none;
   font-size: 18px;
-  margin-right: 15px;
+  margin-right: 31px;
 }
 
 .nav a:hover {
