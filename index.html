@@ -1,164 +1,760 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <title> Artic Landingpage </title>
-    <link rel="stylesheet" href="new.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARTIC MARKET — Fresh Farmers Market Experience</title>
+  
+  <!-- Premium Fonts CDN (Clash Display, Satoshi, and Outfit) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            headingNew: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- GSAP for Editorial Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <style>
+    /* --------------------------------------------------
+       1. Custom Properties & Reset
+       -------------------------------------------------- */
+    :root {
+      --color-primary-green: #6DBE45;
+      --color-primary-yellow: #F4C542;
+      --color-charcoal-black: #0C0C0C;
+      --color-text-white: #FFFFFF;
+      --color-text-muted: rgba(255, 255, 255, 0.6);
+      --font-display: 'Clash Display', -apple-system, sans-serif;
+      --font-body: 'Satoshi', -apple-system, sans-serif;
+      --accent-green: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #0a1009;
+      color: var(--color-text-white);
+      font-family: var(--font-body);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --------------------------------------------------
+       2. Custom Utility Classes
+       -------------------------------------------------- */
+    .texture {
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+      opacity: 0.15;
+      mix-blend-mode: overlay;
+    }
+
+    .font-heading-new {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .font-display {
+      font-family: var(--font-display);
+    }
+
+    /* Precise Line Mask for Split-Line Reveal */
+    .line-mask {
+      display: block;
+      overflow: hidden;
+    }
+
+    /* Cohesive block elements for full line translation */
+    .line-element {
+      display: block;
+      will-change: transform;
+    }
+
+    /* --------------------------------------------------
+       3. Main Container
+       -------------------------------------------------- */
+    .viewport-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      z-index: 10;
+    }
+
+    /* --------------------------------------------------
+       4. Core Center Content (Hero)
+       -------------------------------------------------- */
+    .hero-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 900px;
+      z-index: 20;
+    }
+
+    /* Outer Label Layout & Typography - Restored Exactly to Original */
+    .location-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 1.19rem;
+      font-weight: 700;
+      font-family: 'Satoshi', sans-serif;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+      opacity: 0; 
+    }
+
+    /* Blinking Radar Core Dot - Restored Exactly to Original */
+    .pulse-dot {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent-green);
+      flex-shrink: 0;
+    }
+
+    /* Expanding Radar Ring - Restored Exactly to Original */
+    .pulse-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-color: rgba(34, 197, 94, 0.7);
+      animation: pulse 2s infinite;
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(5);
+        opacity: 0;
+      }
+    }
+
+    .title-wrapper {
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9.5vw, 8.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero-title .artic {
+      color: var(--color-primary-green);
+    }
+
+    .hero-title .market {
+      color: var(--color-primary-yellow);
+    }
+
+    /* Subtext Styling */
+    .hero-subtext {
+      font-family: 'Outfit', 'Satoshi', sans-serif;
+      font-weight: 500;             
+      color: #f5f5f5;               
+      line-height: 1.625;           
+      text-align: center;
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0.3rem;      
+      margin-bottom: 4.0rem;   
+      padding-left: 1rem;
+      padding-right: 1rem;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9)); 
+      opacity: 0;                   
+    }
+
+    /* Responsive Font Sizes */
+    @media (min-width: 0px) {
+      .hero-subtext { font-size: 18px; }
+    }
+    @media (min-width: 640px) {
+      .hero-subtext { font-size: 22px; }
+    }
+    @media (min-width: 1024px) {
+      .hero-subtext { font-size: 24px; }
+    }
+
+    /* Base Button Layout */
+    .cta-btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: #ffffff;
+      color: #0c0c0c;
+      padding: 1rem 2.25rem;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.30s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .cta-btn .btn-icon {
+      display: inline-block;
+      transition: transform 0.30s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.12);
+    }
+
+    .cta-btn:hover .btn-icon {
+      transform: translate(0.125rem, -0.125rem);
+    }
+
+    .cta-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* --------------------------------------------------
+       5. Social Proof Section
+       -------------------------------------------------- */
+    .social-proof {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 0; 
+      margin-bottom: 32px;
+      opacity: 0; 
+    }
+
+    .avatar-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid var(--color-charcoal-black); 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: -12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .avatar-1 {
+      background-color: #1A2E16; 
+      z-index: 3;
+      color: var(--color-primary-green);
+    }
+
+    .avatar-2 {
+      background-color: #332B10;
+      z-index: 2;
+      color: var(--color-primary-yellow);
+    }
+
+    .avatar-3 {
+      background-color: var(--color-text-white);
+      z-index: 1;
+      color: var(--color-charcoal-black);
+      font-weight: 700;
+      font-size: 14px;
+      padding-top: 2px;
+    }
+
+    .social-text {
+      font-family: var(--font-body);
+      font-size: 1.0rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* --------------------------------------------------
+       6. Premium Glowing Highlighter Pill, Float & Shimmer
+       -------------------------------------------------- */
+    .highlighter-pill {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatPill 5s ease-in-out infinite; 
+      width: 105px; /* Fixed width prevents resizing & layout shifts */
+      flex-shrink: 0; /* Prevents container from squeezing */
+      font-variant-numeric: tabular-nums; /* Prevents dynamic micro-jittering during counters */
+    }
+
+    @keyframes floatPill {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-4px); 
+      }
+    }
+
+    .highlighter-pill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.45) 50%,
+        transparent 100%
+      );
+      transform: skewX(-20deg);
+      animation: shimmerSweep 4s infinite ease-in-out;
+    }
+
+    @keyframes shimmerSweep {
+      0% { left: -150%; }
+      30% { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    /* --------------------------------------------------
+       7. Mobile Layout & Position Adaptations
+       -------------------------------------------------- */
+    @media (max-width: 767px) {
+      .viewport-container {
+        padding: 20px 20px 28px 20px !important;
+        height: 100dvh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+
+      /* Mobile-only Absolute Position & Capsule Override for Location label */
+      .location-label {
+        position: absolute !important;
+        top: 24px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin-bottom: 0 !important;
+        z-index: 30;
+        
+        /* Mobile visual styling properties match reference mockup */
+        gap: 0.75rem !important;
+        font-size: 0.8rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.25em !important;
+        padding: 0.55rem 1.35rem !important;
+        background-color: rgba(12, 12, 12, 0.65) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 9999px !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)) !important;
+      }
+
+      .pulse-dot {
+        width: 8px !important;
+        height: 8px !important;
+        box-shadow: 0 0 10px var(--accent-green) !important;
+      }
+
+      /* Centered area elements wrapper positioning */
+      .hero-container {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding-top: 50px !important; 
+      }
+
+      /* Stacked mobile typography spacing */
+      .hero-title {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.0;
+        font-size: 4.4rem !important;
+        margin-bottom: 12px !important;
+      }
+
+      .hero-subtext {
+        margin-top: 0.75rem !important;
+        margin-bottom: 2.25rem !important;
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+      }
+
+      /* Mobile layout transformation for Social Proof component using grid contents */
+      .social-proof {
+        display: grid !important;
+        grid-template-columns: auto auto !important;
+        justify-content: center !important;
+        align-items: center !important;
+        column-gap: 8px !important;
+        row-gap: 12px !important;
+        margin-top: 0 !important;
+        margin-bottom: 24px !important;
+      }
+
+      .avatar-group {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+      }
+
+      .social-text {
+        display: contents !important; /* Exposes highlighter-pill and label directly to the grid container */
+      }
+
+      .highlighter-pill {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        margin: 0 !important;
+        width: 95px !important;
+        height: 34px !important;
+        font-size: 1.15rem !important;
+      }
+
+      .registered-label {
+        grid-column: 1 / span 2 !important;
+        grid-row: 2 !important;
+        text-align: center !important;
+        text-transform: uppercase !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.15em !important;
+        font-weight: 700 !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+      }
+
+      /* Mobile Call-To-Action Button stretching */
+      .cta-btn {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        padding: 1.1rem 2rem !important;
+        margin-top: auto !important;
+      }
+    }
+  </style>
 </head>
-<body>
-  <div class="header">
-    <img src="image/artic 4.png" class="logo" alt="Logo">
-    <div class="nav">
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="https://articmarket.fillout.com/t/6Psh2EaV2bus">Shop</a>
-    </div>
-    <div class="menu-icon" onclick="toggleSidebar()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+<body class="antialiased">
+
+  <!-- Deep Ambient Background Core -->
+  <div class="fixed inset-0 z-0 pointer-events-none bg-[#0a1009] overflow-hidden">
+    <div id="bg-image" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1920&h=1080');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0a1009]/85 via-[#0a1009]/65 to-[#0a1009]/95"></div>
+    <div class="absolute inset-0 texture pointer-events-none"></div>
   </div>
-  
-  <div class="sidebar" id="sidebar">
-    <span class="close-btn" onclick="toggleSidebar()">&times;</span>
-    <a href="#home">Home</a>
-    <a href="#about">About Us</a>
-    <a href="https://articmarket.fillout.com/t/6Psh2EaV2bus">Shop</a>
-  </div>
-  
-  <div class="bg-image-container">
-   <img class="bg-image" src="image/Main background.jpg" alt="Background Image">
-    <div class="overlay">
-        <h1>Grocery Market</h1>
-        <p>Farm Veggies At Wholesale Price</p>
-        <p>Make sure you are buying real vegetables, click and book your place to buy vegetables.</p>
-        <div>
-          <a href="https://articmarket.fillout.com/t/6Psh2EaV2bus">
-              <button>
-                  <span>Button</span>
-              </button>
-          </a>
-      </div>
+
+  <!-- Top-Left Corner Logo -->
+  <div class="absolute top-6 left-6 md:top-10 md:left-12 z-20 logo-anim">
+    <div class="w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+      <span class="text-[#22c55e] font-heading-new font-[900] text-[22px] md:text-[26px] leading-none pt-[2px]">A</span>
     </div>
   </div>
-  <script src="script.js"></script>
 
-    <div id="about" class="containeras">
-      <h1 class="primary mb-2">About Us</h1>
-      <h2 class="secondary mb-8">We are providing fresh farm vegetables at wholesale prices that no one else does.</h2>
-      <div class="flex-col">
-          <div class="flex-row">
-              <img class="responsive half" src="image/About_3 .jpg" alt="Fresh Carrots">
-              <div class="mt-4 left-text">
-                  <h3 class="tertiary">Locally Sourced Produce</h3>
-                  <p>We source our vegetables directly from local farms to ensure freshness and support our community growers.</p>
-              </div>
-          </div>
-          <div class="flex-row reverse">
-              <img class="responsive half" src="image/About_2 .jpg" alt="Farm Fresh Produce">
-              <div class="mt-4 -text">
-                  <h3 class="tertiary">Farm Fresh Produce</h3>
-                  <p>Our vegetables are sourced locally from farms, ensuring freshness and quality in every bite.</p>
-              </div>
-          </div>
-          <div class="flex-row">
-              <img class="responsive half" src="image/About1 .jpg" alt="Locally Sourced Produce">
-              <div class="mt-4 left-text">
-                  <h3 class="tertiary">Locally Sourced Produce</h3>
-                  <p>We source our vegetables from local farms to ensure freshness and support our community.</p>
-              </div>
-          </div>
-        </div>
-     </div>
+  <!-- Primary Foreground Content -->
+  <div class="viewport-container">
 
-  <!-- Shop About section -->
-    <div class="shop-about-section">
-        <div class="shop-about">Fresh Vegetables Delivered to Your Doorstep</div>
-        <p>Explore our wide selection of locally sourced, organic vegetables and place your order today.</p>
-        <a href="https://articmarket.fillout.com/t/6Psh2EaV2bus" class="shop-2">Shop Now</a>
-    </div>
-
-
-   <!-- WHY CHOOSE US section -->
-<div class="custom-container">
-  <h2 class="custom-title">WHY CHOOSE US</h2>
-  <div class="custom-content">
-      <img src="image/Why us main .jpg" alt="Market Image" class="custom-main-image"> <!-- Replace with your actual image file path -->
-      <div class="custom-text-content">
-          <h3 class="custom-subtitle">We Are Supply For High Quality Food That Processing To Work Farmer</h3>
-          <div class="custom-feature">
-              <img src="image/Group 1.svg" alt="High Quality Food Icon" class="custom-icon"> <!-- Replace with your actual icon file path -->
-              <div>
-                  <h4 class="custom-feature-title">High Quality Food</h4>
-                  <p class="custom-feature-description">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this.</p>
-              </div>
-          </div>
-          <div class="custom-feature">
-              <img src="image/Group 1.svg" alt="Natural Food Icon" class="custom-icon"> <!-- Replace with your actual icon file path -->
-              <div>
-                  <h4 class="custom-feature-title">Natural Food</h4>
-                  <p class="custom-feature-description">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this.</p>
-              </div>
-          </div>
-          <div class="custom-feature">
-              <img src="image/Group 1.svg" alt="Fresh Food Icon" class="custom-icon"> <!-- Replace with your actual icon file path -->
-              <div>
-                  <h4 class="custom-feature-title">Fresh Food</h4>
-                  <p class="custom-feature-description">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this.</p>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+    <!-- Centered Editorial Registration Experience -->
+    <main class="hero-container">
       
-          <!-- CONTACT US section -->
-        <div class="contact-container">
-          <h1 class="contact-title">Contact us</h1>
-          <div class="contact-divider"></div>
-          <p class="contact-description">We'd love to hear from you. Reach out to us via:</p>
-          <div class="contact-methods">
-            <div class="contact-method">
-              <a href="mailto:info@freshveggies.com">
-                <img src="gmail.png" alt="Email Icon" class="contact-icon">
-              </a>
-              <h2 class="contact-method-title">Email</h2>
-              <p class="contact-method-description">For inquiries via email, please contact us at:</p>
-              <p class="contact-method-detail">
-                <a href="mailto:info@freshveggies.com">info@freshveggies.com</a>
-              </p>
-            </div>
-            <div class="contact-method">
-              <a href="tel:+18001234567">
-                <img src="call.png" alt="Phone Icon" class="contact-icon">
-              </a>
-              <h2 class="contact-method-title">Phone</h2>
-              <p class="contact-method-description">To speak with us directly, call:</p>
-              <p class="contact-method-detail">
-                <a href="tel:+18001234567">+1-800-123-4567</a>
-              </p>
-            </div>
-            <div class="contact-method">
-              <img src="map.png" alt="Office Icon" class="contact-icon">
-              <h2 class="contact-method-title">Office</h2>
-              <p class="contact-method-description">Visit us at our office location:</p>
-              <p class="contact-method-detail">123 Fresh Veggie Street, City, Country</p>
-            </div>
-          </div>
+      <!-- Location Element with Blinking Radar Dot (HTML preserved from original) -->
+      <div class="location-label flex items-center justify-center gap-[1.5rem] text-[1.19rem] font-bold tracking-[0.35em] uppercase mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+        <div class="pulse-dot">
+          <div class="pulse-ring"></div>
         </div>
-    
-    <!-- Footer -->
-    <footer>
-      <div class="footer-container">
-          <div class="footer-left">
-              <p>Locally Sourced | Organic | Fresh</p>
-          </div>
-          <div class="footer-center">
-              <p>&copy; 2024 ARTIC Market</p>
-          </div>
+        Rajapalayam
       </div>
-    </footer>
+
+      <!-- Center Group Wrapper: groups core content together beautifully on mobile -->
+      <div class="flex flex-col items-center justify-center flex-grow md:flex-grow-0 my-auto w-full">
+        <div class="title-wrapper">
+          <h1 class="hero-title flex flex-col items-center">
+            <!-- Line 1: "Artic" - Stacked Above and wrapped inside single overflow mask -->
+            <span class="line-mask block">
+              <span class="line-element block artic">Artic</span>
+            </span>
+            
+            <!-- Line 2: "Market" - Stacked Below and wrapped inside single overflow mask -->
+            <span class="line-mask block">
+              <span class="line-element block market">Market</span>
+            </span>
+          </h1>
+        </div>
+        
+        <!-- Subtext Block -->
+        <p class="hero-subtext font-headingNew text-[18px] sm:text-[22px] lg:text-[24px] mt-[0.3rem] mb-[4.0rem] leading-relaxed px-4 max-w-[750px] mx-auto text-center">
+          Farm-fresh vegetables directly to customers at wholesale prices.
+        </p>
+        
+        <!-- Solid Social Proof / Counter Widget -->
+        <div class="social-proof">
+          <div class="avatar-group">
+            <!-- Icon 1 -->
+            <div class="avatar avatar-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <!-- Icon 2 -->
+            <div class="avatar avatar-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <!-- Icon 3 -->
+            <div class="avatar avatar-3">
+              <span>+</span>
+            </div>
+          </div>
+          
+          <p class="social-text flex items-center justify-center">
+            <span class="highlighter-pill inline-flex items-center justify-center py-0.5 mx-1.5 rounded-full bg-[#F4C542] text-[#0C0C0C] font-display font-extrabold text-[1.4rem] tracking-normal shadow-[0_0_20px_rgba(244,197,66,0.35)]">
+              <span id="registered-count">0</span>
+            </span>
+            <span class="registered-label inline-block">People Registered</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Button Element -->
+      <button class="cta-btn group relative overflow-hidden inline-flex items-center gap-4 bg-white text-[#0C0C0C] hover:scale-[1.04] active:scale-[0.98] px-9 py-4 rounded-full text-[0.95rem] font-bold tracking-wider uppercase transition-all duration-300 ease-out shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_35px_rgba(255,255,255,0.12)]">
+        <span>Get Access</span>
+        <span class="btn-icon transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1.5 10.5L10.5 1.5M10.5 1.5H3.5M10.5 1.5V8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+    </main>
+
+  </div>
+
+  <!-- Smooth Motion Controls -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+
+      const tl = gsap.timeline();
+
+      // Configure Initial States (Hiding elements to ensure clean entrance without flicker)
+      
+      // Background Image Initial Zoom & Darkness
+      gsap.set('#bg-image', { 
+        scale: 1.35, 
+        filter: 'brightness(0.15) contrast(1.4)' 
+      });
+
+      // Split-Line Elements Initial State: Offset 105% vertically inside `.line-mask`
+      gsap.set('.line-element', { 
+        y: "105%" 
+      });
+
+      // Logo Reveal starting states (Outer circle drops, inside "A" scales inside)
+      gsap.set('.logo-anim', {
+        opacity: 0,
+        y: -150,
+        scale: 0.75,
+        rotate: -12
+      });
+      gsap.set('.logo-anim span', {
+        opacity: 0,
+        scale: 0.4
+      });
+
+      // Subtext Initial State
+      gsap.set('.hero-subtext', { 
+        opacity: 0,
+        y: 30 
+      });
+
+      // Social Proof Component Subsections - Initial states preset for staggered reveal
+      gsap.set('.social-proof', { 
+        opacity: 1 // Container immediately ready, inner nodes will selectively render
+      });
+      gsap.set('.avatar', { 
+        opacity: 0, 
+        scale: 0, 
+        x: -25, 
+        rotate: -45 
+      });
+      gsap.set('.highlighter-pill', { 
+        opacity: 0, 
+        scale: 0.2, 
+        y: 30, 
+        rotateX: 75,
+        transformPerspective: 1000 
+      });
+      gsap.set('.registered-label', { 
+        opacity: 0, 
+        x: 15 
+      });
+
+      // CTA Button Initial State
+      gsap.set('.cta-btn', { 
+        opacity: 0, 
+        scale: 0.85, 
+        y: 35 
+      });
+
+      // 1. Top-Left Logo Swoop-Down Reveal (Multi-layered Animation)
+      tl.to('.logo-anim', {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        duration: 2.0, // High-end decelerating drop length
+        ease: 'expo.out'
+      }, '+=0.1');
+
+      tl.to('.logo-anim span', {
+        opacity: 1,
+        scale: 1,
+        duration: 1.4,
+        ease: 'power4.out'
+      }, '-=1.7'); // Overlaps during descent
+
+      // 2. Location Label Reveal
+      tl.fromTo('.location-label', {
+        opacity: 0,
+        y: 20
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 1.4,
+        ease: 'power4.out'
+      }, '-=1.2');
+
+      // 3. Split-Line Reveal Animation (Smoother & Slower)
+      tl.to('.line-element', {
+        y: "0%",
+        duration: 1.9,       
+        stagger: 0.22,       
+        ease: 'expo.out'     
+      }, '-=1.2');
+
+      // 4. Subtext Fade & Rise
+      tl.to('.hero-subtext', {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,       
+        ease: 'power3.out'
+      }, '-=1.4');
+
+      // Define a unified anchor label for the social proof section to synchronize relative components
+      tl.addLabel('socialReveal', '-=1.2');
+
+      // 5. Social Proof Entrance Reveal
+      // Step 5a: Elastic staggered popping of the user avatars
+      tl.to('.avatar', {
+        opacity: 1,
+        scale: 1,
+        x: 0,
+        rotate: 0,
+        duration: 1.1,
+        stagger: 0.12,
+        ease: 'back.out(1.8)'
+      }, 'socialReveal');
+
+      // Step 5b: 3D flip-pop of the Highlighter Pill (starts 0.4s into avatars popping)
+      tl.to('.highlighter-pill', {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        rotateX: 0,
+        duration: 1.3,
+        ease: 'back.out(2.0)'
+      }, 'socialReveal+=0.4');
+
+      // Step 5c: Elegant sliding reveal of the 'People Registered' text
+      tl.to('.registered-label', {
+        opacity: 1,
+        x: 0,
+        duration: 1.3,
+        ease: 'power4.out'
+      }, 'socialReveal+=0.4');
+
+      // 6. Smooth Cinematic Number Counter (starts AT THE SAME FRAME the pill begins to reveal)
+      const countObj = { val: 0 };
+      tl.to(countObj, {
+        val: 2000, 
+        duration: 2.2, 
+        ease: "power3.out",
+        onUpdate: function() {
+          document.getElementById('registered-count').innerText = Math.round(countObj.val).toLocaleString() + "+";
+        }
+      }, 'socialReveal+=0.4');
+
+      // 7. Call-To-Action Spring-Up
+      tl.to('.cta-btn', {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 1.8,
+        ease: 'back.out(1.4)' 
+      }, '-=1.3');
+
+      // 8. Background Scale and Light Reveal
+      tl.to('#bg-image', {
+        scale: 1.05,
+        filter: 'brightness(1) contrast(1)',
+        duration: 3.2,
+        ease: 'power4.out'
+      }, 0);
+
+    });
+  </script>
 </body>
 </html>
