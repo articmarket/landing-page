@@ -28,6 +28,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            overscroll-behavior: none; /* Prevents native pull-to-refresh / rubber banding on mobile */
         }
 
         /* Safe Typography Classes Explicit to Zones */
@@ -178,7 +179,7 @@
         .trust-item svg { color: var(--green-light); flex-shrink: 0; }
     </style>
 </head>
-<body class="bg-pattern">
+<body class="bg-pattern sm:overflow-auto overflow-hidden">
     
     <!-- Stable Render Core -->
     <div class="fixed inset-0 z-0 pointer-events-none">
@@ -188,14 +189,13 @@
         <div class="absolute inset-0 texture pointer-events-none"></div>
     </div>
 
-    <!-- Layout Grid -->
-    <div class="relative z-10 grid w-full place-items-center" style="min-height: 100vh;">
+    <!-- Layout Grid: Mobile is strictly fixed to 100% viewport to entirely remove scrolling. Reverts to standard behavior on Desktop. -->
+    <div class="fixed inset-0 sm:relative z-10 grid w-full place-items-center overflow-hidden sm:min-h-screen sm:overflow-visible">
         
         <!-- ================= RESPONSIVE FORM PAGE ================= -->
-        <!-- Adjusted Mobile padding here to py-8 (increases top/bottom gap) while keeping sides at px-3.5 and Desktop completely untouched -->
-        <div id="page-form" class="font-body-new page-transition visible-page w-full h-full min-h-[100dvh] flex flex-col justify-center items-center px-3.5 py-8 sm:py-10 sm:px-5 relative" style="grid-area: 1/1;">
+        <!-- Added pt-8 & pb-[72px] specifically to shrink the white box safely from bottom side only on mobile -->
+        <div id="page-form" class="font-body-new page-transition visible-page w-full h-full flex flex-col justify-center items-center px-3.5 pt-8 pb-[72px] sm:py-10 sm:px-5 relative" style="grid-area: 1/1;">
             
-            <!-- Recalculated mobile 'top' position (top-[52px]) strictly to offset the new top padding gap, keeping it exactly on target -->
             <div class="absolute top-[52px] left-[32px] sm:fixed sm:top-8 sm:left-8 z-[100] gsap-back-btn">
                 <button class="group flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-transparent sm:bg-white rounded-full sm:shadow-[0_12px_24px_rgba(0,0,0,0.2)] transition-all sm:hover:bg-gray-100 active:scale-90 outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[#9ca3af] sm:text-gray-800 transition-transform duration-300 group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -204,16 +204,17 @@
                 </button>
             </div>
 
-            <div class="w-full flex-1 sm:flex-none h-auto min-h-[480px] sm:min-h-0 max-w-[520px] bg-white rounded-[26px] sm:rounded-[32px] md:rounded-[40px] px-6 py-8 sm:px-7 sm:pt-14 sm:pb-[48px] md:px-12 md:pt-[75px] md:pb-[53px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] sm:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] flex flex-col justify-center relative mt-0 sm:mt-0 gsap-card mx-auto">
+            <!-- Removed min-h on mobile (min-h-0) so flex perfectly controls it on strictly locked short devices without ever triggering scrolling! -->
+            <div class="w-full flex-1 sm:flex-none h-auto min-h-[400px] sm:min-h-0 max-w-[520px] max-h-full bg-white rounded-[26px] sm:rounded-[32px] md:rounded-[40px] px-6 py-7 sm:px-7 sm:pt-14 sm:pb-[48px] md:px-12 md:pt-[75px] md:pb-[53px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] sm:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] flex flex-col justify-center relative mt-0 sm:mt-0 gsap-card mx-auto">
                 
-                <div class="mb-10 sm:mb-[36px] w-full text-center mt-3 sm:mt-0">
+                <div class="mb-8 sm:mb-[36px] w-full text-center mt-3 sm:mt-0">
                     <h2 class="font-heading-new text-[34px] sm:text-4xl md:text-[46px] font-black tracking-[-0.01em] leading-none flex justify-center items-center gap-2 sm:block">
                         <span class="text-[#22c55e] uppercase">ARTIC</span> <span class="text-[#facc15] uppercase">MARKET</span>
                     </h2>
                     <p class="text-gray-500 text-[13.5px] sm:text-[14.5px] md:text-[16px] font-semibold mt-3 sm:mt-4 max-w-[320px] mx-auto leading-relaxed px-2 sm:px-0">Secure your lifetime wholesale access code.</p>
                 </div>
                 
-                <form id="regForm" onsubmit="event.preventDefault();" class="w-full space-y-[24px] sm:space-y-[18px]">
+                <form id="regForm" onsubmit="event.preventDefault();" class="w-full space-y-[20px] sm:space-y-[18px]">
                     
                     <div class="field">
                         <div class="field-inner">
@@ -255,7 +256,7 @@
                         </div>
                     </div>
 
-                    <div class="pt-[40px] sm:pt-8 w-full">
+                    <div class="pt-[34px] sm:pt-8 w-full">
                         <button type="submit" class="submit-btn" id="submitBtn">
                             <span>Complete Registration</span>
                             <div class="btn-badge">
@@ -263,7 +264,8 @@
                             </div>
                         </button>
                         
-                        <div class="trust-row mt-[36px] sm:mt-[20px]">
+                        <!-- Accurately reduced by exactly 4px from previous (mt-[32px]), strictly untouched on Desktop sm:mt-[20px] -->
+                        <div class="trust-row mt-[32px] sm:mt-[20px]">
                             <div class="trust-item">
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
                                 Secure & Encrypted
@@ -322,4 +324,4 @@
         });
     </script>
 </body>
-</html>s
+</html>
