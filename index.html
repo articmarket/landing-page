@@ -28,7 +28,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            overscroll-behavior: none; /* Prevents native pull-to-refresh / rubber banding on mobile */
+            /* Removed overscroll-behavior lock so pull-to-refresh works again! */
         }
 
         /* Safe Typography Classes Explicit to Zones */
@@ -179,9 +179,10 @@
         .trust-item svg { color: var(--green-light); flex-shrink: 0; }
     </style>
 </head>
-<body class="bg-pattern sm:overflow-auto overflow-hidden">
+<!-- Removed overflow-hidden class to permit natural scroll interactions -->
+<body class="bg-pattern">
     
-    <!-- Stable Render Core -->
+    <!-- Stable Render Core (Keeps Background Image absolutely fixed while page scrolls) -->
     <div class="fixed inset-0 z-0 pointer-events-none">
         <div class="absolute inset-0 bg-cover bg-center transition-all duration-700" 
              style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1920&h=1080'); filter: brightness(0.9);">
@@ -189,11 +190,11 @@
         <div class="absolute inset-0 texture pointer-events-none"></div>
     </div>
 
-    <!-- Layout Grid: Mobile is strictly fixed to 100% viewport to entirely remove scrolling. Reverts to standard behavior on Desktop. -->
-    <div class="fixed inset-0 sm:relative z-10 grid w-full place-items-center overflow-hidden sm:min-h-screen sm:overflow-visible">
+    <!-- Layout Grid: Restored standard relative layout to allow pull-to-refresh on mobile -->
+    <div class="relative z-10 grid w-full place-items-center min-h-[100dvh]">
         
         <!-- ================= RESPONSIVE FORM PAGE ================= -->
-        <div id="page-form" class="font-body-new page-transition visible-page w-full h-full flex flex-col justify-center items-center px-3.5 pt-8 pb-[72px] sm:py-10 sm:px-5 relative" style="grid-area: 1/1;">
+        <div id="page-form" class="font-body-new page-transition visible-page w-full h-full min-h-[100dvh] flex flex-col justify-center items-center px-3.5 pt-8 pb-[72px] sm:py-10 sm:px-5 relative" style="grid-area: 1/1;">
             
             <div class="absolute top-[52px] left-[32px] sm:fixed sm:top-8 sm:left-8 z-[100] gsap-back-btn">
                 <button class="group flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-transparent sm:bg-white rounded-full sm:shadow-[0_12px_24px_rgba(0,0,0,0.2)] transition-all sm:hover:bg-gray-100 active:scale-90 outline-none">
@@ -212,7 +213,7 @@
                     <p class="text-gray-500 text-[13.5px] sm:text-[14.5px] md:text-[16px] font-semibold mt-3 sm:mt-4 max-w-[320px] mx-auto leading-relaxed px-2 sm:px-0">Secure your lifetime wholesale access code.</p>
                 </div>
                 
-                <!-- INCREASED spacing between fields exclusively on mobile (space-y-[26px]), expanding them downwards -->
+                <!-- INCREASED spacing exactly as previously requested -->
                 <form id="regForm" onsubmit="event.preventDefault();" class="w-full space-y-[26px] sm:space-y-[18px]">
                     
                     <div class="field">
@@ -255,7 +256,7 @@
                         </div>
                     </div>
 
-                    <!-- DECREASED this top padding mathematically (pt-[26px]) to absorb the fields pushing downwards, keeping total height mathematically identical! -->
+                    <!-- DECREASED margin math perfectly preserved -->
                     <div class="pt-[26px] sm:pt-8 w-full">
                         <button type="submit" class="submit-btn" id="submitBtn">
                             <span>Complete Registration</span>
@@ -264,7 +265,6 @@
                             </div>
                         </button>
                         
-                        <!-- DECREASED this margin mathematically (mt-[28px]) to absorb the rest of the height, keeping total container height locked -->
                         <div class="trust-row mt-[28px] sm:mt-[20px]">
                             <div class="trust-item">
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -324,4 +324,4 @@
         });
     </script>
 </body>
-</html>
+</html>n
